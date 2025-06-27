@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      🧰 ToolBox App
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToAbout()" color="warning" fill="solid">
+        <ion-icon name="person-circle" slot="start"></ion-icon>
+        Acerca de
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <!-- Header con imagen de toolbox -->
+    <div class="header-section">
+      <div class="toolbox-image">
+        <ion-icon name="construct" size="large"></ion-icon>
+      </div>
+      <h1>Tu Caja de Herramientas Digital</h1>
+      <p>Descubre múltiples funcionalidades útiles en una sola aplicación</p>
+    </div>
+
+    <!-- Grid de herramientas -->
+    <div class="tools-grid">
+      <ion-card 
+        *ngFor="let tool of tools" 
+        class="tool-card"
+        [color]="tool.color"
+        (click)="navigateToTool(tool.route)">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon [name]="tool.icon"></ion-icon>
+            {{ tool.title }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ tool.description }}</p>
+          <ion-button 
+            fill="clear" 
+            [color]="tool.color"
+            class="navigate-btn">
+            Ir a {{ tool.title }}
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Desarrollado con ❤️ usando Ionic & Angular</p>
+    </div>
+  </div>
+</ion-content> 

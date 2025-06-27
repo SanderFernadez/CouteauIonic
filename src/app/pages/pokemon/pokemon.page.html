@@ -1,0 +1,139 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Información de Pokémon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header-section">
+      <ion-icon name="game-controller" size="large"></ion-icon>
+      <h1>Información de Pokémon</h1>
+      <p>Busca información detallada de cualquier Pokémon</p>
+    </div>
+
+    <ion-card class="input-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Nombre del Pokémon</ion-label>
+          <ion-input 
+            [(ngModel)]="pokemonName" 
+            placeholder="Ej: pikachu, charizard, mewtwo"
+            clearInput="true"
+            (keyup.enter)="searchPokemon()">
+          </ion-input>
+        </ion-item>
+        
+        <div class="button-group">
+          <ion-button 
+            expand="block" 
+            (click)="searchPokemon()"
+            [disabled]="loading || !pokemonName.trim()">
+            <ion-icon name="search" slot="start"></ion-icon>
+            {{ loading ? 'Buscando...' : 'Buscar Pokémon' }}
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            expand="block"
+            (click)="clearResults()"
+            [disabled]="loading">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Limpiar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Error Message -->
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        {{ error }}
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Loading -->
+    <ion-card *ngIf="loading" class="loading-card">
+      <ion-card-content>
+        <div class="loading-content">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Buscando Pokémon...</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Pokemon Data -->
+    <ion-card *ngIf="pokemonData" class="pokemon-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="paw"></ion-icon>
+          {{ pokemonData.name | titlecase }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-icon name="star"></ion-icon>
+          Experiencia base: {{ pokemonData.base_experience }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="pokemon-display">
+          <div class="pokemon-image">
+            <img [src]="getPokemonImage()" [alt]="pokemonData.name" *ngIf="getPokemonImage()">
+            <div *ngIf="!getPokemonImage()" class="no-image">
+              <ion-icon name="image-outline" size="large"></ion-icon>
+              <p>Imagen no disponible</p>
+            </div>
+          </div>
+          
+          <div class="pokemon-info">
+            <div class="abilities-section">
+              <h3>Habilidades:</h3>
+              <div class="abilities-list">
+                <ion-chip *ngFor="let ability of getAbilities()" color="primary">
+                  {{ ability | titlecase }}
+                </ion-chip>
+              </div>
+            </div>
+            
+            <div class="cry-section">
+              <ion-button 
+                fill="outline" 
+                color="secondary"
+                (click)="playCry()"
+                [disabled]="!pokemonData.cries.latest">
+                <ion-icon name="volume-high" slot="start"></ion-icon>
+                Reproducir Grito
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Info Card -->
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+          ¿Cómo funciona?
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Esta herramienta te permite buscar información detallada de cualquier Pokémon, incluyendo su imagen oficial, experiencia base, habilidades y su grito característico.</p>
+        <p><strong>Información disponible:</strong></p>
+        <ul>
+          <li>Imagen oficial del Pokémon</li>
+          <li>Experiencia base</li>
+          <li>Lista de habilidades</li>
+          <li>Grito del Pokémon (audio)</li>
+        </ul>
+        <p><strong>API utilizada:</strong> PokeAPI</p>
+        <p><strong>Nota:</strong> El nombre del Pokémon debe estar en inglés y en minúsculas para obtener mejores resultados.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 

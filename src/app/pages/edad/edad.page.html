@@ -1,0 +1,138 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Predicción de Edad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header-section">
+      <ion-icon name="calendar" size="large"></ion-icon>
+      <h1>Predicción de Edad</h1>
+      <p>Estima la edad probable de una persona basada en su nombre</p>
+    </div>
+
+    <ion-card class="input-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input 
+            [(ngModel)]="name" 
+            placeholder="Ingresa un nombre"
+            clearInput="true"
+            (keyup.enter)="predictAge()">
+          </ion-input>
+        </ion-item>
+        
+        <div class="button-group">
+          <ion-button 
+            expand="block" 
+            (click)="predictAge()"
+            [disabled]="loading || !name.trim()">
+            <ion-icon name="search" slot="start"></ion-icon>
+            {{ loading ? 'Prediciendo...' : 'Predecir Edad' }}
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            expand="block"
+            (click)="clearResults()"
+            [disabled]="loading">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Limpiar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Error Message -->
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        {{ error }}
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Loading -->
+    <ion-card *ngIf="loading" class="loading-card">
+      <ion-card-content>
+        <div class="loading-content">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Analizando nombre...</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Results -->
+    <ion-card *ngIf="ageResult" class="result-card" [color]="getAgeCategoryColor()">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon [name]="getAgeCategoryIcon()"></ion-icon>
+          Resultado para "{{ ageResult.name }}"
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="result-content">
+          <div class="age-display">
+            <div class="age-number">
+              <span class="age-value">{{ ageResult.age }}</span>
+              <span class="age-unit">años</span>
+            </div>
+            
+            <div class="category-info">
+              <ion-icon [name]="getAgeCategoryIcon()" size="large"></ion-icon>
+              <h2>{{ getAgeCategoryText() }}</h2>
+            </div>
+          </div>
+          
+          <div class="stats">
+            <ion-item>
+              <ion-label>
+                <h3>Nombre analizado</h3>
+                <p>{{ ageResult.name }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>
+                <h3>Muestras en la base de datos</h3>
+                <p>{{ ageResult.count.toLocaleString() }} registros</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>
+                <h3>Categoría de edad</h3>
+                <p>{{ getAgeCategoryText() }} ({{ ageResult.age < 18 ? 'Menor de 18' : ageResult.age < 65 ? '18-64 años' : '65+ años' }})</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Info Card -->
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+          ¿Cómo funciona?
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Esta herramienta utiliza una base de datos masiva de nombres y edades para estimar la edad más probable de una persona basándose en su nombre. La precisión depende de la cantidad de datos disponibles para ese nombre específico.</p>
+        <p><strong>Categorías de edad:</strong></p>
+        <ul>
+          <li><strong>Joven:</strong> Menor de 18 años</li>
+          <li><strong>Adulto:</strong> Entre 18 y 64 años</li>
+          <li><strong>Anciano:</strong> 65 años o más</li>
+        </ul>
+        <p><strong>API utilizada:</strong> Agify.io</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 

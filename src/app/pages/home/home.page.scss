@@ -1,0 +1,185 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  color: white;
+  margin: 20px;
+  margin-bottom: 40px;
+}
+
+.toolbox-image {
+  margin-bottom: 20px;
+  
+  ion-icon {
+    font-size: 80px;
+    color: white;
+  }
+}
+
+.header-section h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header-section p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.tool-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+}
+
+.tool-card ion-card-header {
+  padding: 20px;
+  background: var(--ion-color-primary);
+  color: white;
+}
+
+.tool-card ion-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}
+
+.tool-card ion-card-content {
+  padding: 20px;
+  
+  p {
+    margin-bottom: 15px;
+    color: #fff;
+    opacity: 0.95;
+    line-height: 1.5;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.15);
+  }
+}
+
+.navigate-btn {
+  margin: 0;
+  font-weight: 500;
+  
+  ion-icon {
+    margin-left: 5px;
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--ion-color-medium);
+  border-top: 1px solid var(--ion-color-light);
+  margin-top: 40px;
+}
+
+// Estilos para el botón "Acerca de"
+ion-button[color="warning"] {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 36px;
+  
+  ion-icon {
+    font-size: 18px;
+    margin-right: 4px;
+  }
+}
+
+// Responsive para el botón
+@media (max-width: 480px) {
+  ion-button[color="warning"] {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    font-size: 12px;
+    min-height: 32px;
+    
+    ion-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header-section {
+    padding: 30px 15px;
+    margin: 10px;
+  }
+  
+  .header-section h1 {
+    font-size: 2rem;
+  }
+  
+  .header-section p {
+    font-size: 1rem;
+  }
+  
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .tool-card ion-card-title {
+    font-size: 1.1rem;
+  }
+}
+
+// Color variations for different tool cards
+.tool-card[color="primary"] ion-card-header {
+  background: var(--ion-color-primary);
+}
+
+.tool-card[color="secondary"] ion-card-header {
+  background: var(--ion-color-secondary);
+}
+
+.tool-card[color="tertiary"] ion-card-header {
+  background: var(--ion-color-tertiary);
+}
+
+.tool-card[color="warning"] ion-card-header {
+  background: var(--ion-color-warning);
+}
+
+.tool-card[color="success"] ion-card-header {
+  background: var(--ion-color-success);
+}
+
+.tool-card[color="danger"] ion-card-header {
+  background: var(--ion-color-danger);
+} 

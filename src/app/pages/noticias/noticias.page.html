@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Noticias de WordPress</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="refreshNews()" [disabled]="loading">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header-section">
+      <img src="https://s.w.org/style/images/about/WordPress-logotype-wmark.png" alt="WordPress Logo" style="max-width:120px; margin-bottom: 10px; display:block; margin-left:auto; margin-right:auto;" />
+      <h1>Noticias de WordPress</h1>
+      <p>Últimas noticias del blog oficial de WordPress.org</p>
+    </div>
+
+    <!-- Loading -->
+    <ion-card *ngIf="loading" class="loading-card">
+      <ion-card-content>
+        <div class="loading-content">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Cargando noticias...</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Error Message -->
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        {{ error }}
+      </ion-card-content>
+    </ion-card>
+
+    <!-- News List -->
+    <div *ngIf="news.length > 0" class="news-list">
+      <ion-card *ngFor="let article of news | slice:0:3" class="news-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="document-text"></ion-icon>
+            {{ stripHtml(article.title.rendered) }}
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <div class="news-content">
+            <p class="news-excerpt">
+              {{ stripHtml(article.excerpt?.rendered || (article.content ? article.content.rendered : '') || '').substring(0, 200) }}...
+            </p>
+            
+            <div class="news-actions">
+              <ion-button 
+                fill="outline" 
+                color="primary"
+                (click)="openNews(article.link)">
+                <ion-icon name="open-outline" slot="start"></ion-icon>
+                Visitar Noticia
+              </ion-button>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Info Card -->
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+          ¿Cómo funciona?
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Esta herramienta muestra las últimas noticias del blog oficial de WordPress.org.</p>
+        <p><strong>API utilizada:</strong> <a href="https://wordpress.org/news/wp-json/wp/v2/posts" target="_blank">https://wordpress.org/news/wp-json/wp/v2/posts</a></p>
+        <p>Publica este enlace en el foro como referencia del API usado.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 

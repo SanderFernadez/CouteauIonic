@@ -1,0 +1,117 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Acerca de Mí</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header-section">
+      <ion-icon name="person-circle" size="large"></ion-icon>
+      <h1>Acerca de Mí</h1>
+      <p>Desarrollador de la ToolBox App</p>
+    </div>
+
+    <ion-card class="profile-card">
+      <ion-card-content>
+        <div class="profile-section">
+          <div class="profile-photo">
+            <img [src]="developerInfo.photo" [alt]="developerInfo.name" *ngIf="developerInfo.photo">
+            <div *ngIf="!developerInfo.photo" class="no-photo">
+              <ion-icon name="person" size="large"></ion-icon>
+            </div>
+          </div>
+          
+          <div class="profile-info">
+            <h2>{{ developerInfo.name }}</h2>
+            <p class="title">Desarrollador de Aplicaciones Móviles</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="contact-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="contact"></ion-icon>
+          Información de Contacto
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="contact-list">
+          <ion-item button (click)="sendEmail()">
+            <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h3>Email</h3>
+              <p>{{ developerInfo.email }}</p>
+            </ion-label>
+            <ion-icon name="open-outline" slot="end"></ion-icon>
+          </ion-item>
+          
+          <ion-item button (click)="callPhone()">
+            <ion-icon name="call" slot="start" color="success"></ion-icon>
+            <ion-label>
+              <h3>Teléfono</h3>
+              <p>{{ developerInfo.phone }}</p>
+            </ion-label>
+            <ion-icon name="open-outline" slot="end"></ion-icon>
+          </ion-item>
+          
+          <ion-item button (click)="openLink(developerInfo.linkedin)">
+            <ion-icon name="logo-linkedin" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h3>LinkedIn</h3>
+              <p>Perfil profesional</p>
+            </ion-label>
+            <ion-icon name="open-outline" slot="end"></ion-icon>
+          </ion-item>
+          
+          <ion-item button (click)="openLink(developerInfo.github)">
+            <ion-icon name="logo-github" slot="start" color="dark"></ion-icon>
+            <ion-label>
+              <h3>GitHub</h3>
+              <p>Repositorios de código</p>
+            </ion-label>
+            <ion-icon name="open-outline" slot="end"></ion-icon>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="project-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="code"></ion-icon>
+          Sobre el Proyecto
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <p><strong>ToolBox App</strong> es una aplicación móvil desarrollada con Ionic y Angular que integra múltiples funcionalidades útiles basadas en el consumo de APIs públicas.</p>
+        
+        <h3>Tecnologías utilizadas:</h3>
+        <ul>
+          <li>Ionic Framework</li>
+          <li>Angular</li>
+          <li>TypeScript</li>
+          <li>SCSS</li>
+          <li>APIs públicas</li>
+        </ul>
+        
+        <h3>Funcionalidades:</h3>
+        <ul>
+          <li>Predicción de género por nombre</li>
+          <li>Predicción de edad por nombre</li>
+          <li>Búsqueda de universidades por país</li>
+          <li>Clima en República Dominicana</li>
+          <li>Información de Pokémon</li>
+          <li>Noticias de WordPress</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 

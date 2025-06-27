@@ -1,0 +1,155 @@
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  color: white;
+  
+  ion-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+}
+
+.loading-card {
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  
+  ion-spinner {
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin: 0;
+    color: var(--ion-color-medium);
+  }
+}
+
+.news-list {
+  margin-bottom: 30px;
+}
+
+.news-card {
+  margin-bottom: 15px;
+  border-radius: 15px;
+  
+  ion-card-header {
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      
+      ion-icon {
+        color: var(--ion-color-primary);
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+.news-content {
+  .news-excerpt {
+    color: var(--ion-color-medium);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  
+  .news-actions {
+    ion-button {
+      margin: 0;
+    }
+  }
+}
+
+.info-card {
+  margin-top: 30px;
+  border-radius: 15px;
+  
+  ion-card-header {
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ion-color-primary);
+      
+      ion-icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
+  ion-card-content {
+    p {
+      line-height: 1.6;
+      color: var(--ion-color-medium);
+      margin-bottom: 15px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    ul {
+      margin: 15px 0;
+      padding-left: 20px;
+      
+      li {
+        margin-bottom: 8px;
+        color: var(--ion-color-medium);
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .header-section {
+    padding: 25px 15px;
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .news-card ion-card-header ion-card-title {
+    font-size: 1.1rem;
+  }
+} 

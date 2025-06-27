@@ -1,0 +1,121 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Predicción de Género</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [class]="genderResult ? (genderResult.gender === 'male' ? 'male-bg' : 'female-bg') : ''">
+  <div class="container">
+    <div class="header-section">
+      <ion-icon name="person" size="large"></ion-icon>
+      <h1>Predicción de Género</h1>
+      <p>Descubre el género probable de un nombre usando inteligencia artificial</p>
+    </div>
+
+    <ion-card class="input-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input 
+            [(ngModel)]="name" 
+            placeholder="Ingresa un nombre"
+            clearInput="true"
+            (keyup.enter)="predictGender()">
+          </ion-input>
+        </ion-item>
+        
+        <div class="button-group">
+          <ion-button 
+            expand="block" 
+            (click)="predictGender()"
+            [disabled]="loading || !name.trim()">
+            <ion-icon name="search" slot="start"></ion-icon>
+            {{ loading ? 'Prediciendo...' : 'Predecir Género' }}
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            expand="block"
+            (click)="clearResults()"
+            [disabled]="loading">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Limpiar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Error Message -->
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        {{ error }}
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Loading -->
+    <ion-card *ngIf="loading" class="loading-card">
+      <ion-card-content>
+        <div class="loading-content">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Analizando nombre...</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Results -->
+    <ion-card *ngIf="genderResult" class="result-card" [color]="getGenderColor()">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon [name]="getGenderIcon()"></ion-icon>
+          Resultado para "{{ genderResult.name }}"
+        </ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="result-content">
+          <div class="gender-display">
+            <ion-icon [name]="getGenderIcon()" size="large"></ion-icon>
+            <h2>{{ getGenderText() }}</h2>
+            <p class="probability">
+              Probabilidad: {{ getProbabilityPercentage() }}%
+            </p>
+          </div>
+          
+          <div class="stats">
+            <ion-item>
+              <ion-label>
+                <h3>Nombre analizado</h3>
+                <p>{{ genderResult.name }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>
+                <h3>Muestras en la base de datos</h3>
+                <p>{{ genderResult.count.toLocaleString() }} registros</p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Info Card -->
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+          ¿Cómo funciona?
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Esta herramienta utiliza una base de datos masiva de nombres y sus géneros asociados para predecir el género más probable de un nombre dado. La precisión depende de la cantidad de datos disponibles para ese nombre específico.</p>
+        <p><strong>API utilizada:</strong> Genderize.io</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 

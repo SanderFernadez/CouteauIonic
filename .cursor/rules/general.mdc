@@ -1,0 +1,109 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+📋 Reglas y Requisitos del Proyecto: “ToolBox App” (Aplicación Multitarea en Ionic)
+🎯 Objetivo General:
+Desarrollar una aplicación móvil usando el framework Ionic (Angular) que funcione como una “caja de herramientas” digitales, integrando múltiples funcionalidades basadas en el consumo de APIs públicas.
+
+✅ Reglas Generales
+Framework obligatorio:
+Debe utilizarse el framework Ionic con Angular. (Se puede usar Capacitor o Cordova si se desea publicar la app o generar APK.)
+
+Diseño responsivo:
+La aplicación debe adaptarse correctamente a distintos tamaños de pantalla y mantener una interfaz amigable.
+
+Manejo de rutas:
+Cada funcionalidad debe implementarse en una vista o página diferente con su respectiva ruta (/genero, /edad, etc.).
+
+Manejo de errores:
+Deben contemplarse errores como: nombre vacío, país no encontrado, Pokémon inexistente, etc. mostrando mensajes adecuados al usuario.
+
+Consumo de APIs:
+Todas las funcionalidades deben consumir APIs públicas usando HttpClientModule con servicios Angular.
+
+Recursos externos:
+Las imágenes, íconos y audios deben alojarse en assets/, excepto los que provienen de las APIs.
+
+Uso del almacenamiento local:
+Opcional: puedes guardar el nombre ingresado o datos repetidos con Ionic Storage o localStorage.
+
+Control de versiones:
+El código debe subirse a un repositorio público o privado en GitHub, GitLab o Bitbucket.
+El README debe contener una breve descripción del proyecto.
+
+Icono de la app:
+El ícono debe ser una foto personal del estudiante/desarrollador.
+
+🧩 Reglas por Funcionalidad
+Inicio / Caja de herramientas (/home)
+
+Mostrar una imagen alusiva a una caja de herramientas.
+
+Incluir botones de navegación a todas las vistas.
+
+Predicción de género (/genero)
+
+Entrada: nombre de persona.
+
+API: https://api.genderize.io/?name={nombre}
+
+Mostrar color de fondo azul (masculino) o rosado (femenino).
+
+Mostrar el género detectado y el nombre ingresado.
+
+Predicción de edad (/edad)
+
+Entrada: nombre.
+
+API: https://api.agify.io/?name={nombre}
+
+Mostrar la edad estimada.
+
+Categorizar entre joven, adulto, anciano con imagen representativa.
+
+Universidades por país (/universidades)
+
+Entrada: país en inglés.
+
+API: http://universities.hipolabs.com/search?country=...
+
+Mostrar nombre, dominio y botón con enlace a la web de cada universidad.
+
+Clima en República Dominicana (/clima)
+
+API sugerida: https://api.openweathermap.org/data/2.5/weather?q=Santo Domingo,DO&appid=...
+
+Mostrar clima actual, ícono del tiempo, temperatura y descripción.
+
+Pokémon (/pokemon)
+
+Entrada: nombre del Pokémon.
+
+API: https://pokeapi.co/api/v2/pokemon/{nombre}
+
+Mostrar: imagen, experiencia base, habilidades, y reproducir sonido.
+
+Noticias de WordPress (/noticias)
+
+Mostrar logo de una página en WordPress.
+
+Consumir API del sitio (ej: /wp-json/wp/v2/posts)
+
+Mostrar título, resumen y botón “visitar” para cada noticia (mínimo 3).
+
+Acerca de mí (/acerca-de)
+
+Mostrar tu foto, nombre completo, correo, teléfono, perfil de LinkedIn y/o Github.
+
+📅 Entregables
+Código fuente completo subido a GitHub (con README).
+
+APK o build instalable opcional.
+
+Capturas de pantalla de todas las vistas.
+
+URL de las APIs usadas (puedes publicarlas en un documento del foro si aplica).
+
+

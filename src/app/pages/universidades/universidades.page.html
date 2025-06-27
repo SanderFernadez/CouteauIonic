@@ -1,0 +1,137 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Universidades por País</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="header-section">
+      <ion-icon name="school" size="large"></ion-icon>
+      <h1>Universidades por País</h1>
+      <p>Encuentra universidades de cualquier país del mundo</p>
+    </div>
+
+    <ion-card class="input-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">País (en inglés)</ion-label>
+          <ion-input 
+            [(ngModel)]="country" 
+            placeholder="Ej: Dominican Republic, United States, Spain"
+            clearInput="true"
+            (keyup.enter)="searchUniversities()">
+          </ion-input>
+        </ion-item>
+        
+        <div class="button-group">
+          <ion-button 
+            expand="block" 
+            (click)="searchUniversities()"
+            [disabled]="loading || !country.trim()">
+            <ion-icon name="search" slot="start"></ion-icon>
+            {{ loading ? 'Buscando...' : 'Buscar Universidades' }}
+          </ion-button>
+          
+          <ion-button 
+            fill="outline" 
+            expand="block"
+            (click)="clearResults()"
+            [disabled]="loading">
+            <ion-icon name="refresh" slot="start"></ion-icon>
+            Limpiar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Error Message -->
+    <ion-card *ngIf="error" color="danger">
+      <ion-card-content>
+        <ion-icon name="alert-circle" slot="start"></ion-icon>
+        {{ error }}
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Loading -->
+    <ion-card *ngIf="loading" class="loading-card">
+      <ion-card-content>
+        <div class="loading-content">
+          <ion-spinner name="crescent"></ion-spinner>
+          <p>Buscando universidades...</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Results Summary -->
+    <ion-card *ngIf="universities.length > 0" class="summary-card">
+      <ion-card-content>
+        <div class="summary-content">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          <h2>Se encontraron {{ getUniversityCount() }} universidades</h2>
+          <p>en {{ country }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Universities List -->
+    <div *ngIf="universities.length > 0" class="universities-list">
+      <ion-card *ngFor="let university of universities" class="university-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="business"></ion-icon>
+            {{ university.name }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            <ion-icon name="location"></ion-icon>
+            {{ university.country }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <div class="university-info">
+            <div *ngIf="university.domains && university.domains.length > 0" class="domain-info">
+              <h3>Dominio:</h3>
+              <p>{{ university.domains[0] }}</p>
+            </div>
+            
+            <div *ngIf="university.web_pages && university.web_pages.length > 0" class="website-info">
+              <ion-button 
+                fill="outline" 
+                color="primary"
+                (click)="openWebsite(university.web_pages[0])">
+                <ion-icon name="globe" slot="start"></ion-icon>
+                Visitar Sitio Web
+              </ion-button>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Info Card -->
+    <ion-card class="info-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle"></ion-icon>
+          ¿Cómo funciona?
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Esta herramienta busca en una base de datos global de universidades y te muestra información detallada sobre las instituciones educativas del país que especifiques.</p>
+        <p><strong>Información disponible:</strong></p>
+        <ul>
+          <li>Nombre de la universidad</li>
+          <li>País de ubicación</li>
+          <li>Dominio web</li>
+          <li>Enlace directo al sitio web</li>
+        </ul>
+        <p><strong>API utilizada:</strong> Universities.hipolabs.com</p>
+        <p><strong>Nota:</strong> El nombre del país debe estar en inglés para obtener mejores resultados.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content> 
