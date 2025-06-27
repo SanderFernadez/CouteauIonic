@@ -1,0 +1,7 @@
+{
+  "name": "toolboxApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
