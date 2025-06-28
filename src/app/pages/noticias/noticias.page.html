@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Noticias de WordPress</ion-title>
     <ion-buttons slot="end">
@@ -51,7 +51,7 @@
         <ion-card-content>
           <div class="news-content">
             <p class="news-excerpt">
-              {{ stripHtml(article.excerpt?.rendered || (article.content ? article.content.rendered : '') || '').substring(0, 200) }}...
+              {{ stripHtml(article.excerpt.rendered || (article.content ? article.content.rendered : '') || '').substring(0, 200) }}...
             </p>
             
             <div class="news-actions">

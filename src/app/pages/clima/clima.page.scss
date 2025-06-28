@@ -220,4 +220,23 @@
   .temperature .temp-value {
     font-size: 3rem;
   }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 8px;
+  }
+  .header-section {
+    padding: 16px 6px;
+    margin: 4px;
+  }
+  .main-weather {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  .temperature .temp-value {
+    font-size: 2.2rem;
+  }
 } 

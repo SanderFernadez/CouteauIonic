@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ApiService, WeatherResponse } from '../../services/api.service';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clima',
   templateUrl: './clima.page.html',
   styleUrls: ['./clima.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ClimaPage implements OnInit {
 

@@ -223,4 +223,20 @@
     flex-direction: column;
     text-align: center;
   }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 8px;
+  }
+  .header-section {
+    padding: 16px 6px;
+    margin: 4px;
+  }
+  .summary-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
 } 

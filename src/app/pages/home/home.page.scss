@@ -182,4 +182,26 @@ ion-button[color="warning"] {
 
 .tool-card[color="danger"] ion-card-header {
   background: var(--ion-color-danger);
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 8px;
+  }
+  .header-section {
+    padding: 16px 6px;
+    margin: 4px;
+  }
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .tool-card ion-card-title {
+    font-size: 1rem;
+  }
+  .footer {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 } 

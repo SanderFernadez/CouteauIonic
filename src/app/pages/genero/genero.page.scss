@@ -239,4 +239,24 @@
       font-size: 1.5rem;
     }
   }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 8px;
+  }
+  .header-section {
+    padding: 16px 6px;
+    margin: 4px;
+  }
+  .gender-display {
+    padding: 10px;
+  }
+  .gender-display ion-icon {
+    font-size: 36px;
+  }
+  .gender-display h2 {
+    font-size: 1.1rem;
+  }
 } 

@@ -238,4 +238,19 @@
   .abilities-list {
     justify-content: center;
   }
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    padding: 8px;
+  }
+  .header-section {
+    padding: 16px 6px;
+    margin: 4px;
+  }
+  .pokemon-image img {
+    max-width: 100px;
+    max-height: 100px;
+  }
 } 
